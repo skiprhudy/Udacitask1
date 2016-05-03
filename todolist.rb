@@ -49,4 +49,35 @@ class TodoList
     puts ''
   end
 
+  def print_by_status
+    completed = Array.new
+    incomplete = Array.new
+    puts "#{title}"
+    @items.each do |item |
+      if item.completed?
+        completed << item
+      else
+        incomplete << item
+      end
+    end
+    print_completed(completed)
+    print_incomplete(incomplete)
+  end
+
+  private
+
+  def print_completed(completed)
+    puts "Completed:"
+    completed.each do |complete|
+      puts "#{complete.description}"
+    end
+  end
+
+  def print_incomplete(incomplete)
+    puts "\nIncomplete:"
+    incomplete.each do |incomplete|
+      puts "#{incomplete.description}"
+    end
+  end
+
 end
