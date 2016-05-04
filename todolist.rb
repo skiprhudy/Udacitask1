@@ -1,16 +1,36 @@
+require 'date'
 
 class Item
-  attr_reader :description, :completed
-  attr_writer :completed
+  attr_reader :description, :completed, :created, :created_str, :updated, :updated_str, :age
 
   def initialize(description)
     @description = description
     @completed = false
-  end
+		@created = DateTime.now
+		@created_str = @created.strftime('%Y-%m-%d-%H:%M:%S.%L')
+		@updated = nil
+		@updated_str = 'Not Complete Yet'
+		@age = nil
+	end
+
+	def finished
+		@completed = true
+		@updated = DateTime.now
+		@age = @updated
+		@updated_str = @updated.strftime('%Y-%m-%d-%H:%M:%S.%L')
+	end
 
   def completed?
     @completed
-  end
+	end
+
+	def age
+		now = DateTime.now
+		if completed?
+			@age
+		end
+		@age = now - @created
+	end
 end
 
 class TodoList
@@ -27,9 +47,9 @@ class TodoList
     @items.push(item)
   end
 
-  def update_item(num,status)
+  def update_item(num)
     item = @items[num]
-    item.completed = status
+    item.finished
   end
 
   def delete_item(num)
@@ -43,7 +63,7 @@ class TodoList
   def print_list
     puts "#{title}"
     @items.each_with_index do |item, x|
-      puts "#{x}) #{item.description}, Complete: #{item.completed}"
+      puts "#{x}) #{item.description}, Complete: #{item.completed}\n   (Created: #{item.created}, Completed: #{item.updated_str})"
     end
     puts ''
   end
@@ -51,7 +71,7 @@ class TodoList
   def print_by_status
     completed = Array.new
     incomplete = Array.new
-    puts "#{title}"
+    puts "\n#{title}"
     @items.each_with_index do | item, idx |
 			data = { item: item, index: idx }
 			if item.completed?
@@ -62,7 +82,7 @@ class TodoList
     end
     print_completed(completed)
     print_incomplete(incomplete)
-  end
+	end
 
   private
 
@@ -74,10 +94,10 @@ class TodoList
     end
   end
 
-  def print_incomplete(incomplete)
+  def print_incomplete(incompleted)
     puts "\nIncomplete:"
-		puts 'All tasks complete!' if incomplete.empty?
-    incomplete.each do |incomplete|
+		puts 'All tasks complete!' if incompleted.empty?
+    incompleted.each do |incomplete|
 			puts "#{incomplete[:index]}) #{incomplete[:item].description}"
     end
   end

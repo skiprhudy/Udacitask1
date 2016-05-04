@@ -3,4 +3,4 @@ New features:
 1) Print by status (completed == true or completed == false)
 2) Include date info: created, updated, and how old
 3) ProgressBar (it's not a real one, just pretend for demo)
-4) Print by date (ascending or descending
+4) Print by date (ascending or descending)
