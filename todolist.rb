@@ -1,5 +1,8 @@
 require 'date'
 
+ASC = 0
+DESC = 1
+
 class Item
   attr_reader :description, :completed, :created, :created_str, :updated, :updated_str, :age
 
@@ -27,7 +30,7 @@ class Item
 	def age
 		now = DateTime.now
 		if completed?
-			@age
+			return @age
 		end
 		@age = now - @created
 	end
@@ -84,6 +87,12 @@ class TodoList
     print_incomplete(incomplete)
 	end
 
+	def print_by_age(sort = ASC)
+		ary = @items.sort { |a,b| a.age <=> b.age } if sort == ASC
+		ary = @items.sort { |a,b| b.age <=> a.age } if sort == DESC
+		i = 0
+	end
+
   private
 
   def print_completed(completed)
@@ -101,5 +110,7 @@ class TodoList
 			puts "#{incomplete[:index]}) #{incomplete[:item].description}"
     end
   end
-
 end
+
+ASC.freeze
+DESC.freeze

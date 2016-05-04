@@ -40,5 +40,8 @@ todo.print_list
 #print by status
 demo_print_by_status
 
+#print by age
+demo_print_by_age
+
 
 

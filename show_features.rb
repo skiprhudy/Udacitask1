@@ -32,6 +32,24 @@ end
 
 def demo_print_by_age
 	#print by age, descending (oldest first)
+	age = TodoList.new('A weekend list')
+	age.add_item('Mow the lawn')
+	sleep 3
+	age.add_item('Go to grocery')
+	sleep 2
+	age.add_item('Buy basil plants at nursery')
+	sleep 4
+	age.add_item('Take Alex to movie')
+	sleep 1
+	age.update_item(1)
+	sleep 3
+	age.update_item(3)
+	sleep 2
+	age.update_item(0)
+	sleep 1
+	age.update_item(2)
+	age.print_by_age DESC
 
 	#print by age, ascending (newest first)
+	age.print_by_age
 end
