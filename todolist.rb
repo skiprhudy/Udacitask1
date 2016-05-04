@@ -1,4 +1,3 @@
-require 'table_print'
 
 class Item
   attr_reader :description, :completed
@@ -53,11 +52,12 @@ class TodoList
     completed = Array.new
     incomplete = Array.new
     puts "#{title}"
-    @items.each do |item |
-      if item.completed?
-        completed << item
+    @items.each_with_index do | item, idx |
+			data = { item: item, index: idx }
+			if item.completed?
+        completed << data
       else
-        incomplete << item
+        incomplete << data
       end
     end
     print_completed(completed)
@@ -67,16 +67,18 @@ class TodoList
   private
 
   def print_completed(completed)
-    puts "Completed:"
+    puts 'Completed: '
+		puts 'No tasks complete!' if completed.empty?
     completed.each do |complete|
-      puts "#{complete.description}"
+      puts "#{complete[:index]}) #{complete[:item].description}"
     end
   end
 
   def print_incomplete(incomplete)
     puts "\nIncomplete:"
+		puts 'All tasks complete!' if incomplete.empty?
     incomplete.each do |incomplete|
-      puts "#{incomplete.description}"
+			puts "#{incomplete[:index]}) #{incomplete[:item].description}"
     end
   end
 
