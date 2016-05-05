@@ -43,6 +43,12 @@ class Item
     some_time = @created.strftime('%s').to_i
     now - some_time
   end
+
+  def print_item
+    puts "#{description}, Complete: #{completed}"
+    print "   (Created: #{created}, Completed: #{updated_str}"
+    puts ", Age: #{age} secs)"
+  end
 end
 
 # TodoList is a class that offers the following:
@@ -86,9 +92,8 @@ class TodoList
     # (in my tests anyway)
     for idx in 0..items.length-1 do
       item = items[idx]
-      puts "#{idx}) #{item.description}, Complete: #{item.completed}"
-      print "   (Created: #{item.created}, Completed: #{item.updated_str}"
-      puts ", Age: #{item.age} secs)"
+      print "#{idx}) "
+      item.print_item
     end
     puts ''
   end
@@ -97,16 +102,8 @@ class TodoList
     completed  = []
     incomplete = []
     puts "\n#{title}"
-    @items.each_with_index do |item, idx|
-      data = { item: item, index: idx }
-      if item.completed?
-        completed << data
-      else
-        incomplete << data
-      end
-    end
-    print_completed(completed)
-    print_incomplete(incomplete)
+    print_completed @items.select { |item| item.completed? }
+    print_incomplete @items.reject { |item| item.completed? }
   end
 
   def print_by_age(sort = ASC)
@@ -121,7 +118,7 @@ class TodoList
     puts 'Completed: '
     puts 'No tasks complete!' if completed.empty?
     completed.each do |complete|
-      puts "#{complete[:index]}) #{complete[:item].description}, Age: #{complete[:item].age}"
+      puts "#{complete.description}, Age: #{complete.age}"
     end
   end
 
@@ -129,7 +126,7 @@ class TodoList
     puts "\nIncomplete:"
     puts 'All tasks complete!' if incompleted.empty?
     incompleted.each do |incomplete|
-      puts "#{incomplete[:index]}) #{incomplete[:item].description}, Age: #{incomplete[:item].age}"
+      puts "#{incomplete.description}, Age: #{incomplete.age}"
     end
   end
 end
