@@ -1,6 +1,16 @@
 New features:
 
 1) Print by status (completed == true or completed == false)
+		The idea is to show what items in list are complete vs. what are not.
 2) Include date info: created, updated, and how old (age)
+    Usually a task app will provide a user with info on when the item
+    was created, when it was finished, but also it's current (or final)
+    'age' -- how long the item has been open or how long it was until
+    it was completed.
 3) ProgressBar (it's not a real one, just pretend for demo)
+		I threw this in to illustrate some delays during the completion
+		of some items in the lists.
 4) Print by date (ascending or descending)
+		This can be useful for showing the oldest items in list first to
+		prioritize or see what's been taking the longest to complete. Or
+		the shortest to complete.
