@@ -4,7 +4,7 @@ ASC = 0
 DESC = 1
 
 class Item
-  attr_reader :description, :completed, :created, :created_str, :updated, :updated_str, :age
+  attr_reader :description, :completed, :created, :created_str, :updated, :updated_str
 
   def initialize(description)
     @description = description
@@ -13,13 +13,12 @@ class Item
 		@created_str = @created.strftime('%Y-%m-%d-%H:%M:%S.%L')
 		@updated = nil
 		@updated_str = 'Not Complete Yet'
-		@age = nil
 	end
 
 	def finished
 		@completed = true
 		@updated = DateTime.now
-		@age = @updated
+		@age = @updated.strftime('%s').to_i
 		@updated_str = @updated.strftime('%Y-%m-%d-%H:%M:%S.%L')
 	end
 
@@ -28,11 +27,12 @@ class Item
 	end
 
 	def age
-		now = DateTime.now
+		now = DateTime.now.strftime('%s').to_i
 		if completed?
 			return @age
 		end
-		@age = now - @created
+		some_time = @created.strftime('%s').to_i
+		age = now - some_time
 	end
 end
 
@@ -63,10 +63,13 @@ class TodoList
     @title = new_title
   end
 
-  def print_list
+  def print_list(items = nil)
+		items ||= @items
     puts "#{title}"
     @items.each_with_index do |item, x|
-      puts "#{x}) #{item.description}, Complete: #{item.completed}\n   (Created: #{item.created}, Completed: #{item.updated_str})"
+      puts "#{x}) #{item.description}, Complete: #{item.completed}"
+			print "   (Created: #{item.created}, Completed: #{item.updated_str} "
+			puts "Age: #{item.age})"
     end
     puts ''
   end
@@ -90,7 +93,7 @@ class TodoList
 	def print_by_age(sort = ASC)
 		ary = @items.sort { |a,b| a.age <=> b.age } if sort == ASC
 		ary = @items.sort { |a,b| b.age <=> a.age } if sort == DESC
-		i = 0
+		print_list(ary)
 	end
 
   private

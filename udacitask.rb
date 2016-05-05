@@ -6,8 +6,11 @@ todo = TodoList.new('Skip Todo List')
 
 # Add four new items
 todo.add_item('Buy Absinthe')
+sleep 1
 todo.add_item('Buy Paula\'s Texas Orange')
+sleep 1
 todo.add_item('Buy Edelflower Liquor')
+sleep 1
 todo.add_item('Buy lemons')
 
 # Print the list

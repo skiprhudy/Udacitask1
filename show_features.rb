@@ -1,6 +1,7 @@
 require_relative 'fake_progress_bar'
 
 def demo_print_by_status
+	puts "\nDemo print by status"
 	status = TodoList.new('Make Drink for Wife')
 	status.add_item('Buy Bourbon')
 	status.add_item('Buy Domaine De Canton')
@@ -31,7 +32,7 @@ def demo_print_by_status
 end
 
 def demo_print_by_age
-	#print by age, descending (oldest first)
+	puts "\nDemo print by age"
 	age = TodoList.new('A weekend list')
 	age.add_item('Mow the lawn')
 	sleep 3
@@ -48,8 +49,10 @@ def demo_print_by_age
 	age.update_item(0)
 	sleep 1
 	age.update_item(2)
+
+	puts "\nPrint by task age, descending (oldest first)"
 	age.print_by_age DESC
 
-	#print by age, ascending (newest first)
+	puts "\nPrint by age, ascending (newest first)"
 	age.print_by_age
 end
