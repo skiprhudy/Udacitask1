@@ -40,11 +40,8 @@ todo.update_title('Linda\'s List')
 # Print the list
 todo.print_list
 
-#print by status
+# print by status
 demo_print_by_status
 
-#print by age
+# print by age
 demo_print_by_age
-
-
-
