@@ -1,0 +1,47 @@
+commit e9d588258ea9aa742c66366b32da9a48c9dd9068
+Author: codemutt <skiprhudy@hotmail.com>
+Date:   Thu May 5 12:01:05 2016 -0500
+
+    minor rubocop changes
+
+commit 203ee75671a58e90765c7603a19e51f0d1ae3b7f
+Author: codemutt <skiprhudy@hotmail.com>
+Date:   Thu May 5 09:58:16 2016 -0500
+
+    fix up age issues.
+
+commit cea3a77dad2b528d58b0ba0be6581c46974c9c26
+Author: Skip Rhudy <skiprhudy@hotmail.com>
+Date:   Wed May 4 19:45:01 2016 -0500
+
+    put sort by age in; minor bug to fix; save for travel
+
+commit ccf4c7bf6778ff46d479ff45705f65d66ea8d133
+Author: Skip Rhudy <skiprhudy@hotmail.com>
+Date:   Wed May 4 17:16:43 2016 -0500
+
+    initial age implementation
+
+commit 9a080d1a69dafee6ccbdce7f8c7c1ab6820cb76d
+Author: Skip Rhudy <skiprhudy@hotmail.com>
+Date:   Wed May 4 16:50:37 2016 -0500
+
+    add a file to manage feature demos; add created, updated, age of item; add created updated to basic print list
+
+commit 4644f2706171a2a0cace742d9841bf3de1d5b179
+Author: Skip Rhudy <skiprhudy@hotmail.com>
+Date:   Wed May 4 15:45:00 2016 -0500
+
+    add progress bar; finish print by status
+
+commit f49f18be39dd967051eca288c95d57792ffa40cc
+Author: codemutt <skiprhudy@hotmail.com>
+Date:   Mon May 2 23:53:20 2016 -0500
+
+    add new feature print by status
+
+commit 8bf98b6ba7b113c97dd5656e86ee98ad57029bee
+Author: codemutt <skiprhudy@hotmail.com>
+Date:   Mon May 2 23:39:32 2016 -0500
+
+    initial impl as per basic spec. no new features yet.
