@@ -13,12 +13,13 @@ class Item
 		@created_str = @created.strftime('%Y-%m-%d-%H:%M:%S.%L')
 		@updated = nil
 		@updated_str = 'Not Complete Yet'
+    @age = nil
 	end
 
 	def finished
 		@completed = true
 		@updated = DateTime.now
-		@age = @updated.strftime('%s').to_i
+		@age = @updated.strftime('%s').to_i - @created.strftime('%s').to_i
 		@updated_str = @updated.strftime('%Y-%m-%d-%H:%M:%S.%L')
 	end
 
@@ -66,10 +67,12 @@ class TodoList
   def print_list(items = nil)
 		items ||= @items
     puts "#{title}"
-    @items.each_with_index do |item, x|
-      puts "#{x}) #{item.description}, Complete: #{item.completed}"
-			print "   (Created: #{item.created}, Completed: #{item.updated_str} "
-			puts "Age: #{item.age})"
+    #note: using 'each' on the collection does not guarantee order i want ... (in my tests anyway)
+    for idx in 0 .. items.length-1 do
+      item = items[idx]
+      puts "#{idx}) #{item.description}, Complete: #{item.completed}"
+      print "   (Created: #{item.created}, Completed: #{item.updated_str} "
+      puts "Age: #{item.age} secs)"
     end
     puts ''
   end
@@ -102,7 +105,7 @@ class TodoList
     puts 'Completed: '
 		puts 'No tasks complete!' if completed.empty?
     completed.each do |complete|
-      puts "#{complete[:index]}) #{complete[:item].description}"
+      puts "#{complete[:index]}) #{complete[:item].description}, Age: #{complete[:item].age}"
     end
   end
 
@@ -110,7 +113,7 @@ class TodoList
     puts "\nIncomplete:"
 		puts 'All tasks complete!' if incompleted.empty?
     incompleted.each do |incomplete|
-			puts "#{incomplete[:index]}) #{incomplete[:item].description}"
+			puts "#{incomplete[:index]}) #{incomplete[:item].description}, Age: #{incomplete[:item].age}"
     end
   end
 end
